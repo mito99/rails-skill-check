@@ -6,8 +6,8 @@ class Api::V1::PaymentsController < ApplicationController
   rescue_from ApplicationError, with: :resque_api_app_error
 
   def get_plans
-    num_of_users,num_of_boxs = view_context.request_get_plans(params)
-    plans = Payments::Plans.selectable(num_of_users, num_of_boxs)
+    num_of_users,num_of_boxes = view_context.request_get_plans(params)
+    plans = Payments::Plans.selectable(num_of_users, num_of_boxes)
     render json: view_context.response_get_plans(plans)
   end
 

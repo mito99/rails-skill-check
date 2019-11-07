@@ -3,10 +3,10 @@ require './app/errors/application_error'
 module Api::V1::PaymentsHelper
 
   def request_get_plans(params)
-    users, boxs = params['users'], params['boxs']
+    users, boxes = params['users'], params['boxes']
     raise ApplicationError, "invalid param(users)" unless number?(users)
-    raise ApplicationError, "invalid param(boxs)"  unless number?(boxs)
-    return users.to_i, boxs.to_i
+    raise ApplicationError, "invalid param(boxes)"  unless number?(boxes)
+    return users.to_i, boxes.to_i
   end
 
   def response_get_plans(plans)

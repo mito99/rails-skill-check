@@ -16,12 +16,12 @@ module Payments
       @user_cnt_max         = attributes["user_cnt_max"]
       @box_cnt_max          = attributes["box_cnt_max"]
       @num_of_users         =(attributes["num_of_users"]||0)
-      @num_of_boxs          =(attributes["num_of_boxs"] ||0)
+      @num_of_boxes          =(attributes["num_of_boxes"] ||0)
     end
 
     def selectable?
       return false if @num_of_users > @user_cnt_max
-      return false if @num_of_boxs  > @box_cnt_max
+      return false if @num_of_boxes  > @box_cnt_max
       true
     end
 
@@ -49,7 +49,7 @@ module Payments
       defalut_range = (0..@box_cnt_default)
       surcharge_range = (@box_cnt_default+1..@box_cnt_max)
       _calc_surcharge_fee defalut_range, surcharge_range,
-        @num_of_boxs, @surcharge_box_fee
+        @num_of_boxes, @surcharge_box_fee
     end
 
     private

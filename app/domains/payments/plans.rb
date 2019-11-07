@@ -17,12 +17,12 @@ module Payments
       Plans.new(plan_list) 
     end
     
-    def self.selectable(num_of_users, num_of_boxs)
+    def self.selectable(num_of_users, num_of_boxes)
       plan_list = ::Plan.all.map do |v|
         Payments::Plan.new(
           v.attributes.merge({
             "num_of_users"=> num_of_users, 
-            "num_of_boxs" => num_of_boxs})
+            "num_of_boxes" => num_of_boxes})
         )
       end.filter{|v|v.selectable?}
       Plans.new(plan_list)

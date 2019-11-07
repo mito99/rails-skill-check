@@ -16,15 +16,15 @@ $(function(){
     clear_plans_message();
     clear_action_message();
     const users = $("#input-user").val();
-    const boxs  = $("#input-box").val();
-    const msg = validation(users, boxs);
+    const boxes  = $("#input-box").val();
+    const msg = validation(users, boxes);
     if(msg) return action_message(msg);
 
     // サーバ負荷軽減のため、連続送信を１秒間隔に制限
     operation_block();
     const url = "./api/v1/payments/plans";
-    $.get(url,{users, boxs}).
-      then(success_plans_getapi(users, boxs)). 
+    $.get(url,{users, boxes}).
+      then(success_plans_getapi(users, boxes)). 
       catch(fail_plans_getapi).
       then(clear_operation_block(1000));
   });
@@ -64,9 +64,9 @@ $(function(){
     $(".sim-plans_message").text("");
   }
 
-  function success_plans_getapi(users, boxs){
+  function success_plans_getapi(users, boxes){
     return function(response){
-      plans_message(users, boxs);
+      plans_message(users, boxes);
       $("[data-plan-id]").each((idx,card)=>{
         const plan_id = $(card).data("plan-id");
         const plan_data = response[plan_id];
