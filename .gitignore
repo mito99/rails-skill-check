@@ -35,3 +35,6 @@
 
 # Ignore vscode
 .vscode
+
+# Ignore log
+/*.log
