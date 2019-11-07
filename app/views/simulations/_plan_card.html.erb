@@ -1,0 +1,92 @@
+<div class="sim-plan-card" data-plan-id="<%=card.id%>"
+  data-card-status="">
+  <dt class="sim-plan-card_head">
+    <span><%=card.name%></span>
+    <div class="sim-plan-card_head_icon" style="display:none">
+      <p>安いよ！</p>
+    </div>
+  </dt>
+  <dd class="sim-plan-card_body">
+    <dl>
+      <div class="sim-plan-card_body_attr-group">
+        <div class="sim-plan-card_body_attr">
+          <dt>初期ユーザ数</dt>
+          <dd>
+            <span>
+              <%=card.user_cnt_default%>
+            </span>
+            <span>名</span>
+          </dd>
+        </div>
+        <div class="sim-plan-card_body_attr">
+          <dt>初期受信箱数</dt>
+          <dd>
+            <span>
+              <%=card.box_cnt_default%>
+            </span>
+            <span>個</span>
+          </dd>
+        </div>
+      </div>
+
+      <div class="sim-plan-card_body_attr-group">
+        <div class="sim-plan-card_body_attr">
+          <dt>最大ユーザ数</dt>
+          <dd>
+            <span>
+              <%=card.user_cnt_max.to_s(:delimited)%>
+            </span>
+            <span>名</span>
+          </dd>
+        </div>
+        <div class="sim-plan-card_body_attr">
+          <dt>最大受信箱数</dt>
+          <dd>
+            <span>
+              <%=card.box_cnt_max.to_s(:delimited)%>
+            </span>
+            <span>個</span>
+          </dd>
+        </div>
+      </div>
+
+      <div class="sim-plan-card_body_attr-group">
+        <div class="sim-plan-card_body_attr">
+          <dt>月額料金</dt>
+          <dd>
+            <span>
+              <%=card.monthly_fee.to_s(:delimited)%>
+            </span>
+            <span>円</span>
+          </dd>
+        </div>
+        <div class="sim-plan-card_body_attr">
+          <dt>追加料金(ユーザ)</dt>
+          <dd>
+            <span>
+              <%=card.surcharge_user_fee.to_s(:delimited)%>
+            </span>
+            <span>円</span>
+          </dd>
+        </div>
+        <div class="sim-plan-card_body_attr">
+          <dt>追加料金(受信箱)</dt>
+          <dd>
+            <span>
+              <%=card.surcharge_box_fee.to_s(:delimited)%>
+            </span>
+            <span>円</span>
+          </dd>
+        </div>
+      </div>
+    </dl>
+    <div class="sim-plan-card_body_price">
+      <p class="sim-plan-card_body_price_value">
+        <span>
+          <%=card.monthly_fee_total.to_s(:delimited)%>
+        </span>
+        <span>円/月</span>
+      </p>
+    </div>
+  </dd>
+</div>

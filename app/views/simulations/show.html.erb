@@ -1,0 +1,32 @@
+<main>
+  <h3>料金シミュレーション</h3>
+
+  <section class="sim-plans">
+    <p class="sim-plans_message"></p>
+    <dl class="sim-plan-cards"
+      data-user-max="<%=@max_counts[:user]%>"
+      data-box-max="<%=@max_counts[:box]%>">
+      <%=render partial:'plan_card', collection:@plans, as: :card %>
+    </dl>
+  </section>
+
+  <section class="sim-action">
+    <h4>ユーザ数、受信箱数に応じた月額料金を計算します。</h4>
+    <div class="sim-action_input">
+      <div class="sim-action_message"></div>
+      <label>
+        <span>ユーザ数</span>
+        <input id="input-user" type="text" maxlength="10"
+          name="user" value="" placeholder="0" />
+      </label>
+      <label>
+        <span>受信箱数</span>
+        <input id="input-box" type="text" maxlength="10"
+          name="box"  value="" placeholder="0" />
+      </label>
+    </div>
+    <div class="sim-action_button">
+      <button id="calc-button">料金計算</button>
+    </div>
+  </section>
+</main>

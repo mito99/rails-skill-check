@@ -1,0 +1,23 @@
+{
+  "name": "interview_skill_check",
+  "private": true,
+  "dependencies": {
+    "@rails/ujs": "^6.0.0-alpha",
+    "jquery": "^3.4.1"
+  },
+  "version": "0.1.0",
+  "scripts": {
+    "build:dev": "webpack --progress --mode=development",
+    "build:pro": "webpack --progress --mode=production"
+  },
+  "devDependencies": {
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-manifest-plugin": "^2.2.0"
+  }
+}
