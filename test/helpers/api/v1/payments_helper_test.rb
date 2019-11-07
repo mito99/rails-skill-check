@@ -26,13 +26,15 @@ module Api::V1
       end
       assert_equal 'invalid param(users)', e2.message
 
-      # ユーザ数0は、誤りではない！
-      r1 = request_get_plans({'users'=>'0', 'boxes'=>'1'})
-      assert_equal [0, 1], r1
+      # ユーザ数0を入力してみる
+      e3 = assert_raises ApplicationError do
+        request_get_plans({'users'=>'0', 'boxes'=>'1'})
+      end
+      assert_equal 'invalid param(users)', e3.message
 
       # ユーザ数1000は、誤りではない！
-      r2 = request_get_plans({'users'=>'1000', 'boxes'=>'1'})
-      assert_equal [1000, 1], r2
+      r1 = request_get_plans({'users'=>'1000', 'boxes'=>'1'})
+      assert_equal [1000, 1], r1
     end
 
     test 'プラン取得_リクエスト組立て_ボックス数の誤りを検出できるか？' do
@@ -48,39 +50,41 @@ module Api::V1
       end
       assert_equal 'invalid param(boxes)', e2.message
 
-      # ボックス数0は、誤りではない！
-      r1 = request_get_plans({'users'=>'1', 'boxes'=>'0'})
-      assert_equal [1, 0], r1
+      # ボックス数に0を指定してみる
+      e3 = assert_raises ApplicationError do
+        request_get_plans({'users'=>'1', 'boxes'=>'0'})
+      end
+      assert_equal 'invalid param(boxes)', e3.message
 
       # ボックス数1000は、誤りではない！
-      r2 = request_get_plans({'users'=>'1', 'boxes'=>'1000'})
-      assert_equal [1, 1000], r2
+      r1 = request_get_plans({'users'=>'1', 'boxes'=>'1000'})
+      assert_equal [1, 1000], r1
     end
  
     test 'プラン取得_レスポンス組立て_金額順にソートされているはず' do
-      Plan = Struct.new(:label, :calc_monthly_fee)
+      Plan = Struct.new(:id, :monthly_fee_total)
 
       # 組み合わせ１
-      plans1 = [
-        Plan.new('A', 200),
-        Plan.new('B', 300),
-        Plan.new('C', 100)
-      ]
+      plans1 = ::Payments::Plans.new([
+        Plan.new(1, 200),
+        Plan.new(2, 300),
+        Plan.new(3, 100)
+      ])
       r1 = response_get_plans(plans1)
-      assert_equal 'C', r1[0][:label]
-      assert_equal 'A', r1[1][:label]
-      assert_equal 'B', r1[2][:label]
+      assert_equal "{:fee=>200, :rank=>2}", r1[1].to_s
+      assert_equal "{:fee=>300, :rank=>3}", r1[2].to_s
+      assert_equal "{:fee=>100, :rank=>1}", r1[3].to_s
 
       # 組み合わせ2
-      plans2 = [
-        Plan.new('A', 300),
-        Plan.new('B', 200),
-        Plan.new('C', 100)
-      ]
+      plans2 = ::Payments::Plans.new([
+        Plan.new(1, 300),
+        Plan.new(2, 200),
+        Plan.new(3, 100)
+      ])
       r2 = response_get_plans(plans2)
-      assert_equal 'C', r2[0][:label]
-      assert_equal 'B', r2[1][:label]
-      assert_equal 'A', r2[2][:label]
+      assert_equal "{:fee=>300, :rank=>3}", r2[1].to_s
+      assert_equal "{:fee=>200, :rank=>2}", r2[2].to_s
+      assert_equal "{:fee=>100, :rank=>1}", r2[3].to_s
     end
   end
 end

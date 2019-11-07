@@ -15,8 +15,9 @@ $(function(){
   $("#calc-button").on("click", function(){
     clear_plans_message();
     clear_action_message();
+
     const users = $("#input-user").val();
-    const boxes  = $("#input-box").val();
+    const boxes = $("#input-box").val();
     const msg = validation(users, boxes);
     if(msg) return action_message(msg);
 
@@ -31,8 +32,8 @@ $(function(){
 
   function validation(user, box){
     const un_num = [user, box].some(p=>!p.match(/^[0-9]+$/));
-    if(un_num){
-      return "ユーザ数、受信箱数に0以上の数値を入力してください。";
+    if(un_num || user <= 0 || box <= 0){
+      return "ユーザ数、受信箱数には１以上の数値を入力してください。";
     }
 
     const user_max_num = $(".sim-plan-cards").data("user-max");

@@ -15,8 +15,8 @@ module Payments
       @surcharge_box_fee    = attributes["surcharge_box_fee"]
       @user_cnt_max         = attributes["user_cnt_max"]
       @box_cnt_max          = attributes["box_cnt_max"]
-      @num_of_users         =(attributes["num_of_users"]||0)
-      @num_of_boxes          =(attributes["num_of_boxes"] ||0)
+      @num_of_users         =(attributes["num_of_users"]||1)
+      @num_of_boxes         =(attributes["num_of_boxes"] ||1)
     end
 
     def selectable?

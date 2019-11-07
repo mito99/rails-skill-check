@@ -4,8 +4,8 @@ module Api::V1::PaymentsHelper
 
   def request_get_plans(params)
     users, boxes = params['users'], params['boxes']
-    raise ApplicationError, "invalid param(users)" unless number?(users)
-    raise ApplicationError, "invalid param(boxes)"  unless number?(boxes)
+    raise ApplicationError, "invalid param(users)" unless positive_number?(users)
+    raise ApplicationError, "invalid param(boxes)" unless positive_number?(boxes)
     return users.to_i, boxes.to_i
   end
 
@@ -20,7 +20,8 @@ module Api::V1::PaymentsHelper
     {message: e.message}
   end
 
-  def number?(str)
-    str =~ /^[0-9]+$/
+  def positive_number?(str)
+    return false unless str =~ /^[0-9]+$/
+    str.to_i >= 1
   end
 end
